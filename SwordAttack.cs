@@ -6,7 +6,7 @@ namespace UnityStandardAssets._2D
 {
     public class SwordAttack : MonoBehaviour
     {
-
+        //references
         public GameObject swordHitBox;
         public GameObject swordHitBoxAbove;
         public GameObject swordHitBoxBelow;
@@ -21,16 +21,16 @@ namespace UnityStandardAssets._2D
         }
 
 
-        public void StandardSwordAttack()
+        public void StandardSwordAttack() //Sets the sword attack hitbox to active
         {
             Debug.Log("SwordAttackStandard!");
             swordHitBox.SetActive(true);
-            m_Control.hasStandardSwordAttacke = true;
-            StartCoroutine(disableMe(0.15f, swordHitBox));
+            m_Control.hasStandardSwordAttacke = true; //used for timing
+            StartCoroutine(disableMe(0.15f, swordHitBox));//coroutine for enabling the attack after 0.15 seconds
             //set animation <= 0.15seconds.
         }
 
-        private IEnumerator disableMe(float i, GameObject swordHitBox)
+        private IEnumerator disableMe(float i, GameObject swordHitBox) //Disable me coroutine for allowing the hitboxes to be timed.
         {
             yield return new WaitForSeconds(i);
             swordHitBox.SetActive(false);
@@ -39,7 +39,7 @@ namespace UnityStandardAssets._2D
             m_Control.hasStandardSwordAttackedBelow = false;
         }
 
-        public void SwordAttackAbove()
+        public void SwordAttackAbove() //sets the above attack hitbox active
         {
             Debug.Log("SwordAttackAbove!");
             swordHitBoxAbove.SetActive(true);
@@ -47,7 +47,7 @@ namespace UnityStandardAssets._2D
             StartCoroutine(disableMe(0.5f, swordHitBoxAbove));
         }
 
-        public void SwordAttackBelow()
+        public void SwordAttackBelow() //sets the below attack hitbox active
         {
             Debug.Log("SwordAttackBelow!");
             swordHitBoxBelow.SetActive(true);
