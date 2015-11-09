@@ -5,26 +5,33 @@ using System;
 namespace Galaxy {
     public class PlayerHealthManager : MonoBehaviour {
 
-
+        //references
         public static int playerHealth = 100;
         private Restarter restarter;
         private Collider2D col;
         [SerializeField] private GameObject player;
+        public static bool isInvulnerable = false;
 
-
+        
         public void Start()
         {
             restarter = GetComponent<Restarter>();
             col = player.GetComponent<Collider2D>();
         }
 
-        public static void DoDamageToPlayer(int damage) {
+        public void DoDamageToPlayer(int damage) {  //method for doing damage to the player.
+            if(damage < playerHealth)                //if player has been hit and is not dead
+            {
+                StartCoroutine(PlayerInvulnerable());
+            }
             playerHealth -= damage;
         }
 
-        public static IEnumerator playerInvulnerable()
+        private IEnumerator PlayerInvulnerable() //Sets player Invulnerable after taking damage
         {
-            throw new NotImplementedException();
+            isInvulnerable = true;
+            yield return new WaitForSeconds(1f);
+            isInvulnerable = false;
         }
 
         public void Update()
@@ -33,6 +40,15 @@ namespace Galaxy {
             {
                 StartCoroutine(PlayerDeath());//if the player dies, load the level. //need to add death effects and coroutine for restarting
                                                 //the level at a check point, with death/particle effects.
+            }
+
+            if (isInvulnerable)
+            {
+                player.gameObject.tag = "PlayerInvulnerable"; //changing tags because still want to be able to interact with enviroment but not take any damage.
+            }
+            else
+            {
+                player.gameObject.tag = "Player";
             }
         }
 
@@ -46,5 +62,7 @@ namespace Galaxy {
 
             Application.LoadLevel(Application.loadedLevelName);
         }
+
+        
     }
 }

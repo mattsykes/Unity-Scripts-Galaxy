@@ -1,16 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 namespace Galaxy {
     public class DamagePlayer : MonoBehaviour
     {
         private SmallEnemyPatrol smallEnemyPatrol;
+        private PlayerHealthManager healthManager;
         [SerializeField]  private int damageToGive; //float for the inspector to tell the object how much damage to give to the player when they collide
         [SerializeField]  private GameObject player;
 
         void Start()
         {
             smallEnemyPatrol = GetComponentInChildren<SmallEnemyPatrol>();
+            healthManager = FindObjectOfType<PlayerHealthManager>(); 
         }
 
         void Update()
@@ -21,15 +24,11 @@ namespace Galaxy {
         {
             if (col.gameObject.tag == "Player")
             {
-                print(col.relativeVelocity);
-                player.gameObject.GetComponent<Rigidbody2D>().AddForce(Vector2.left * 400);
-                player.gameObject.GetComponent<Rigidbody2D>().AddForce(Vector2.up * 200);
-                //set the animation on the player, 
-                //player.gameObject.GetComponent<Animator>().SetBool("DroneAttack", true);
                 print("Hit Player!");
                 smallEnemyPatrol.hasHitPlayer = true;
-                PlayerHealthManager.DoDamageToPlayer(damageToGive);
+                healthManager.DoDamageToPlayer(damageToGive);
             }
         }
+
     }
 }
