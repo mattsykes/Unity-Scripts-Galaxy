@@ -22,6 +22,11 @@ namespace Galaxy {
             playerHealth -= damage;
         }
 
+        public static IEnumerator playerInvulnerable()
+        {
+            throw new NotImplementedException();
+        }
+
         public void Update()
         {
             if (playerHealth <= 0)
