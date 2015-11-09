@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System;
 
 public class SmallEnemyPatrol : MonoBehaviour {
 
@@ -17,6 +18,7 @@ public class SmallEnemyPatrol : MonoBehaviour {
     private Vector2 spawnPosition;
     public GameObject enemy;
     private Animator anim;
+    public bool hasHitPlayer;
 
     ENEMYSTATE enemyState = ENEMYSTATE.PATROL;
 
@@ -35,6 +37,12 @@ public class SmallEnemyPatrol : MonoBehaviour {
                 if (playerInRange)
                 {
                     enemy.transform.position = Vector2.MoveTowards(enemy.transform.position, player.transform.position, speed * 2 * Time.deltaTime);
+                    if (hasHitPlayer)
+                    {
+                        GetComponent<Collider2D>().enabled = false;
+                        enemyState = ENEMYSTATE.PATROL;
+                        StartCoroutine(DivePlayerAgain());
+                    }
                 }
                 break;
 
@@ -47,6 +55,13 @@ public class SmallEnemyPatrol : MonoBehaviour {
         }
 
 
+    }
+
+    private IEnumerator DivePlayerAgain()
+    {
+        yield return new WaitForSeconds(2);
+        hasHitPlayer = false;
+        GetComponent<Collider2D>().enabled = true;
     }
 
     void OnTriggerEnter2D(Collider2D other)
