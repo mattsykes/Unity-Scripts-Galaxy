@@ -2,7 +2,7 @@
 using System.Collections;
 
 
-namespace UnityStandardAssets._2D
+namespace Galaxy
 {
     public class Door : MonoBehaviour
     {

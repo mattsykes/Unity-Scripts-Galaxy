@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 
-namespace UnityStandardAssets._2D
+namespace Galaxy
 {
     public partial class PlatformerCharacter2D : MonoBehaviour
     {

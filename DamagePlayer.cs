@@ -1,19 +1,23 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class DamagePlayer : MonoBehaviour {
-
-
-	void Update () {
-	}
-
-    void OnCollisionEnter2D(Collision2D col)
+namespace Galaxy {
+    public class DamagePlayer : MonoBehaviour
     {
-        if(col.gameObject.tag == "Player")
+
+        public int damageToGive; //float for the inspector to tell the object how much damage to give to the player when they collide
+
+        void Update()
         {
-            print("Hit Player!");
-            PlayerHealthManager.DoDamageToPlayer(50);
+        }
+
+        void OnCollisionEnter2D(Collision2D col)
+        {
+            if (col.gameObject.tag == "Player")
+            {
+                print("Hit Player!");
+                PlayerHealthManager.DoDamageToPlayer(damageToGive);
+            }
         }
     }
-
 }

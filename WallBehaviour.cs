@@ -2,7 +2,8 @@
 using System.Collections;
 using System;
 
-namespace UnityStandardAssets._2D
+namespace Galaxy
+
 {
     public class WallBehaviour: MonoBehaviour
     {

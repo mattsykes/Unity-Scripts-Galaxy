@@ -1,11 +1,11 @@
 using System;
 using UnityEngine;
 
-namespace UnityStandardAssets._2D
+namespace Galaxy
 {
     public class Restarter : MonoBehaviour
     {
-        private void OnTriggerEnter2D(Collider2D other)
+        public void OnTriggerEnter2D(Collider2D other)
         {
             if (other.tag == "Player")
             {
